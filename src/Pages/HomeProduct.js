@@ -5,67 +5,69 @@ import { Link, useParams } from "react-router-dom";
 export default function Home() {
   
     const baseUrl = "http://localhost:8080/api/v1/";
-    const [companies, setCompanies] = useState([]);
+    const [products, setProducts] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    loadCompanies();
+    loadProducts();
   }, []);
 
-  const loadCompanies = async () => {
-    const result = await axios.get(baseUrl + "empresas");
-    setCompanies(result.data);
+  const loadProducts = async () => {
+    const result = await axios.get(baseUrl + "productos");
+    setProducts(result.data);
   };
 
-  const deleteCompany = async (id) => {
-    await axios.delete(baseUrl + `empresa/${id}`);
-    loadCompanies();
+  const deleteProduct = async (id) => {
+    await axios.delete(baseUrl + `producto/${id}`);
+    loadProducts();
   };
 
   return (
     <div className="container">
       <br></br>
       <Link className="btn btn-outline-primary mx-2"
-        to={`/addcompany`}>
-        Agregar nueva empresa
+        to={`/addproduct`}>
+        Agregar nuevo producto
       </Link>
       <div className="py-4">
         <table className="table border shadow">
           <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">NIT</th>
+                <th scope="col">Código</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Telefono</th>
+                <th scope="col">caracteristicas</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Divisa</th>
+                <th scope="col">Empresa</th>
             </tr>
           </thead>
           <tbody>
             
-            {companies.map((company, index) => (
+            {products.map((product) => (
               <tr>
-                <th key={index}>{index + 1}</th>
-                <td>{company.nit}</td>
-                <td>{company.nombre}</td>
-                <td>{company.direccion}</td>
-                <td>{company.telefono}</td>
+                <td>{product.codigo}</td>
+                <td>{product.nombre}</td>
+                <td>{product.caracteristicas}</td>
+                <td>{product.valor}</td>
+                <td>{product.divisa}</td>
+                <td>{product.empresa}</td>
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewcompany/${company.nit}`}
+                    to={`/viewproduct/${product.codigo}`}
                   >
                     Ver
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/editcompany/${company.nit}`}
+                    to={`/editproduct/${product.codigo}`}
                   >
                     Editar
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteCompany(company.nit)}
+                    onClick={() => deleteProduct(product.codigo)}
                   >
                     Borrar
                   </button>

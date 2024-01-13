@@ -22,13 +22,13 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
             <div className=''>
-                <Link className="btn btn-outline-light" to="/addCompany">
+                <Link className="btn btn-outline-light" to="/">
                 Añadir empresa
                 </Link>
-                <Link className="btn btn-outline-light" to="">
+                <Link className="btn btn-outline-light" to="/HomeProduct">
                     Añadir Producto
                 </Link>
-                <Link className="btn btn-outline-light" to="">
+                <Link className="btn btn-outline-light" to="HomeStock">
                     Registrar inventario
                 </Link>
             </div>
